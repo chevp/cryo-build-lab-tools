@@ -55,6 +55,17 @@ npm run build
 
 Output will be in `dist/cryo-build-lab-tools/`
 
+### GitHub Pages Deployment
+
+This project is configured for automatic deployment to GitHub Pages.
+
+```bash
+# Build for GitHub Pages
+.\build-gh-pages.bat
+```
+
+See [GITHUB_PAGES.md](GITHUB_PAGES.md) for complete deployment instructions and troubleshooting.
+
 ## Integration with C++ Renderer
 
 The Angular app communicates with the C++ renderer via HTTP REST API:
@@ -143,6 +154,12 @@ When migrating tools from `apps/tools/`, follow this process:
 3. Add proper TypeScript interfaces for data models
 4. Integrate with renderer HTTP API
 5. Update routing and navigation
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) for details.
+
+Copyright (c) 2025 Patrice Chevillat
 
 ---
 

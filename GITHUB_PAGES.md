@@ -27,8 +27,9 @@ npm run build -- --base-href /cryo-build-lab-tools/
 ### 1. Enable GitHub Pages
 
 1. Go to repository **Settings** → **Pages**
-2. Source: Deploy from `gh-pages` branch
-3. Click **Save**
+2. **Build and deployment**:
+   - Source: **GitHub Actions** (NOT "Deploy from a branch")
+3. The workflow will automatically deploy after setup
 
 ### 2. Configure Workflow Permissions
 
@@ -72,6 +73,16 @@ npx http-server dist/cryo-build-lab-tools -p 8080
 
 ## Troubleshooting
 
+### Jekyll errors (No such file or directory @ dir_chdir0)
+
+This means GitHub Pages is trying to use Jekyll instead of the GitHub Actions workflow.
+
+**Solution**:
+1. Go to **Settings** → **Pages**
+2. Under "Build and deployment", set Source to **GitHub Actions**
+3. Do NOT select "Deploy from a branch"
+4. The `.nojekyll` file will prevent Jekyll processing
+
 ### 404 on routes
 
 - Ensure `404.html` is created (copied from `index.html`)
@@ -79,14 +90,16 @@ npx http-server dist/cryo-build-lab-tools -p 8080
 
 ### Assets not loading
 
-- Check `--base-href` matches repository name
-- Verify `.nojekyll` file exists in docs/
+- Check `--base-href` matches repository name exactly: `/cryo-build-lab-tools/`
+- Verify `.nojekyll` file exists in deployed output
+- Check browser console for path errors
 
 ### Build fails
 
 - Run `npm install` to ensure dependencies are installed
-- Check Node.js version (requires 16+)
-- Review GitHub Actions logs
+- Check Node.js version (requires 18+)
+- Review GitHub Actions logs under the **Actions** tab
+- Verify `package.json` scripts are correct
 
 ## Custom Domain (Optional)
 

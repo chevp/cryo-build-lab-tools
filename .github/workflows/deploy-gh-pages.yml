@@ -36,11 +36,19 @@ jobs:
 
       - name: Prepare GitHub Pages output
         run: |
-          mkdir docs
-          xcopy /E /I /Y dist\cryo-build-lab-tools docs
-          echo. > docs\.nojekyll
-          copy docs\index.html docs\404.html
-        shell: cmd
+          New-Item -ItemType Directory -Force -Path docs
+          Copy-Item -Path "dist\cryo-build-lab-tools\*" -Destination "docs\" -Recurse -Force
+          New-Item -Path "docs\.nojekyll" -ItemType File -Force
+          Copy-Item -Path "docs\index.html" -Destination "docs\404.html" -Force
+        shell: powershell
+
+      - name: Verify build output
+        run: |
+          Write-Host "Checking docs directory..."
+          Get-ChildItem -Path docs -Recurse | Select-Object -First 10
+          Write-Host "`n.nojekyll exists:"
+          Test-Path "docs\.nojekyll"
+        shell: powershell
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
