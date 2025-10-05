@@ -1,0 +1,55 @@
+<div class="app-container" [class.embedded]="isEmbedded">
+  <nav class="sidebar" *ngIf="!isEmbedded">
+    <div class="sidebar-header">
+      <h1>🧊 Cryo Build Lab Tools</h1>
+      <p class="subtitle">Development Tools</p>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Monitoring</div>
+      <a routerLink="/io-monitor" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">I/O Monitor</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Editing</div>
+      <a routerLink="/scene-editor" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📐</span>
+        <span class="nav-label">Scene Editor</span>
+      </a>
+      <a routerLink="/material-editor" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">✨</span>
+        <span class="nav-label">Material Editor</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Showcase</div>
+      <a routerLink="/showcase" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🎨</span>
+        <span class="nav-label">Arctic Showcase</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Build</div>
+      <a routerLink="/build-lab" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🔧</span>
+        <span class="nav-label">Build Lab</span>
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="connection-status">
+        <span class="status-dot" [class.connected]="isRendererConnected"></span>
+        <span class="status-text">{{ isRendererConnected ? 'Renderer Connected' : 'Disconnected' }}</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

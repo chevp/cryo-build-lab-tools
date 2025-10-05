@@ -2,7 +2,7 @@
 
 **Consolidated Angular multi-tool application for Cryo Build Lab**
 
-This is a modern Angular 17 standalone-component application that consolidates all Arctic development tools into a single, cohesive web application with proper routing and state management.
+This is an application that consolidates all Cryo development tools into a single, cohesive web application with proper routing and state management.
 
 ## Features
 
@@ -40,7 +40,7 @@ npm install
 npm start
 
 # Or serve specific tools on their assigned ports
-npm run serve:io-monitor      # Port 3006
+npm run serve:io-monitor       # Port 3006
 npm run serve:showcase         # Port 3007
 npm run serve:build-lab        # Port 3008
 npm run serve:material-editor  # Port 3005
