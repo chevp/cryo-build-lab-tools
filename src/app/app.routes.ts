@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Patrice Chevillat
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [

@@ -1,13 +1,13 @@
 # 🧊 Cryo Build Lab Tools
 
-**Consolidated Angular multi-tool application for Arctic Build Lab**
+**Consolidated Angular multi-tool application for Cryo Build Lab**
 
 This is a modern Angular 17 standalone-component application that consolidates all Arctic development tools into a single, cohesive web application with proper routing and state management.
 
 ## Features
 
-- **📊 I/O Monitor** - Real-time gRPC/HTTP traffic monitoring (Keysight-style)
-- **📐 Scene Editor** - Visual editing for .arctic and .elyrion.xml files
+- **📊 I/O Monitor** - Real-time gRPC/HTTP traffic monitoring
+- **📐 Scene Editor** - Visual editing for .arctic files
 - **✨ Material Editor** - PBR material editing with real-time preview
 - **🎨 Showcase** - Demo scenes and feature galleries
 - **🔧 Build Lab** - Build system integration and asset pipeline

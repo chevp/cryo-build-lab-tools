@@ -1,5 +1,10 @@
+/**
+ * Copyright (c) 2025 Patrice Chevillat
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,8 +12,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   template: `
-    <div class="app-container">
-      <nav class="sidebar">
+    <div class="app-container" [class.embedded]="isEmbedded">
+      <nav class="sidebar" *ngIf="!isEmbedded">
         <div class="sidebar-header">
           <h1>🧊 Cryo Build Lab</h1>
           <p class="subtitle">Development Tools</p>
@@ -68,6 +73,10 @@ import { CommonModule } from '@angular/common';
       display: flex;
       height: 100vh;
       overflow: hidden;
+    }
+
+    .app-container.embedded .content {
+      width: 100%;
     }
 
     .sidebar {
@@ -175,8 +184,16 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   isRendererConnected = false;
+  isEmbedded = false;
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    // Check for embedded mode via query parameter
+    this.route.queryParams.subscribe(params => {
+      this.isEmbedded = params['embedded'] === 'true';
+    });
+
     this.checkRendererConnection();
     setInterval(() => this.checkRendererConnection(), 5000);
   }
