@@ -196,24 +196,31 @@ Connection status is shown in the sidebar footer.
 ## Project Structure
 
 ```
-cryo-build-lab-tools/
-├── src/
+apps/cryo-build-lab-tools/          # Pure Angular web app
+├── src/                            # Angular source code ONLY
 │   ├── app/
-│   │   ├── tools/
+│   │   ├── tools/                 # Tool components (TypeScript/Angular)
 │   │   │   ├── io-monitor/
 │   │   │   ├── scene-editor/
 │   │   │   ├── material-editor/
+│   │   │   ├── shader-graph-editor/
 │   │   │   ├── showcase/
 │   │   │   └── build-lab/
-│   │   ├── app.component.ts    # Main app with sidebar nav
-│   │   └── app.routes.ts       # Lazy-loaded routes
-│   ├── styles.scss             # Global dark theme styles
-│   ├── main.ts                 # Bootstrap entry point
+│   │   ├── app.component.ts       # Main app with sidebar nav
+│   │   └── app.routes.ts          # Lazy-loaded routes
+│   ├── styles.scss                # Global dark theme styles
+│   ├── main.ts                    # Bootstrap entry point
 │   └── index.html
 ├── angular.json
 ├── package.json
 ├── tsconfig.json
-└── README.md
+├── README.md                       # This file
+├── ARCHITECTURE.md                 # Backend integration docs
+├── DEPENDENCIES.md                 # npm dependencies
+├── TOOLING_OVERVIEW.md             # Complete tooling overview
+└── MOVED_TOOLS.md                  # ⚠️ Important: Tools moved to root
+
+📦 C++ Tools Location: ../../tools/  (See MOVED_TOOLS.md)
 ```
 
 ## Development Guidelines
