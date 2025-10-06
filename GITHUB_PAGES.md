@@ -10,7 +10,7 @@ This Angular application can be deployed to GitHub Pages for public access.
 
 1. Push changes to `main` branch
 2. GitHub Actions automatically builds and deploys
-3. Visit https://YOUR-USERNAME.github.io/cryo-build-lab-tools/
+3. Visit https://chevp.github.io/cryo-build-lab-tools/
 
 ### Manual Deployment
 
@@ -112,12 +112,12 @@ This means GitHub Pages is trying to use Jekyll instead of the GitHub Actions wo
    ```
    Type: CNAME
    Host: www
-   Value: YOUR-USERNAME.github.io
+   Value: chevp.github.io
    ```
 
 3. Update GitHub Pages settings with custom domain
 
 ---
 
-**Repository**: https://github.com/YOUR-USERNAME/cryo-build-lab-tools
-**Live Site**: https://YOUR-USERNAME.github.io/cryo-build-lab-tools/
+**Repository**: https://github.com/chevp/cryo-build-lab-tools
+**Live Site**: https://chevp.github.io/cryo-build-lab-tools/
