@@ -1,0 +1,196 @@
+<!--
+  Copyright (c) 2025 Patrice Chevillat
+  Licensed under the MIT License. See LICENSE.md for details.
+-->
+
+<div class="container-runtime">
+  <div class="header">
+    <h1>Container Runtime</h1>
+    <div class="connection-status" [class.connected]="isConnected">
+      <span class="status-dot"></span>
+      <span class="status-text">{{ isConnected ? 'Connected' : 'Disconnected' }}</span>
+    </div>
+  </div>
+
+  <div class="content-grid" *ngIf="isConnected">
+    <!-- Current Scene Info -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Current Scene</h2>
+        <button class="btn-icon" (click)="getCurrentScene()" title="Refresh">
+          🔄
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="scene-info">
+          <div class="info-row">
+            <span class="label">Scene:</span>
+            <span class="value">{{ currentScene || 'None' }}</span>
+          </div>
+          <div class="info-row" *ngIf="sceneLoadTime">
+            <span class="label">Loaded:</span>
+            <span class="value">{{ sceneLoadTime }}</span>
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-secondary" (click)="reloadScene()" [disabled]="!currentScene || currentScene === 'None' || loadStatus.isLoading">
+            Reload Scene
+          </button>
+          <button class="btn btn-secondary" (click)="clearScene()" [disabled]="!currentScene || currentScene === 'None' || loadStatus.isLoading">
+            Clear Scene
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Quick Start</h2>
+      </div>
+      <div class="card-body">
+        <p class="description">
+          Load the default startup container (index.container.pbtxt)
+        </p>
+        <button class="btn btn-primary btn-large" (click)="runStartupContainer()" [disabled]="loadStatus.isLoading">
+          <span class="btn-icon">▶️</span>
+          Run Startup Container
+        </button>
+      </div>
+    </div>
+
+    <!-- Available Containers -->
+    <div class="card card-full-width">
+      <div class="card-header">
+        <h2>Available Containers</h2>
+        <button class="btn-icon" (click)="refreshContainerList()" title="Refresh list">
+          🔄
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="container-list" *ngIf="containerFiles.length > 0">
+          <div
+            class="container-item"
+            *ngFor="let container of containerFiles"
+            [class.selected]="selectedContainer === container.path"
+            (click)="selectedContainer = container.path"
+          >
+            <div class="container-info">
+              <div class="container-name">{{ container.name }}</div>
+              <div class="container-meta">
+                <span class="size">{{ formatFileSize(container.size) }}</span>
+                <span class="separator">•</span>
+                <span class="date">{{ container.lastModified }}</span>
+              </div>
+            </div>
+            <button
+              class="btn btn-primary btn-small"
+              (click)="runContainer(); $event.stopPropagation()"
+              [disabled]="loadStatus.isLoading"
+            >
+              Run
+            </button>
+          </div>
+        </div>
+        <div class="empty-state" *ngIf="containerFiles.length === 0">
+          <p>No container files found</p>
+          <p class="hint">Place .pbtxt container files in the assets directory</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Container Path -->
+    <div class="card card-full-width">
+      <div class="card-header">
+        <h2>Custom Container Path</h2>
+      </div>
+      <div class="card-body">
+        <p class="description">
+          Enter a custom path to a container file (relative to asset root)
+        </p>
+        <div class="input-group">
+          <input
+            type="text"
+            class="input"
+            [(ngModel)]="customContainerPath"
+            placeholder="e.g., scenes/my_scene.container.pbtxt"
+            [disabled]="loadStatus.isLoading"
+          />
+          <button
+            class="btn btn-primary"
+            (click)="selectedContainer = ''; runContainer()"
+            [disabled]="!customContainerPath || loadStatus.isLoading"
+          >
+            <span class="btn-icon">▶️</span>
+            Run
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div class="card card-full-width" *ngIf="loadStatus.message">
+      <div class="card-body">
+        <div
+          class="status-message"
+          [class.status-info]="loadStatus.type === 'info'"
+          [class.status-success]="loadStatus.type === 'success'"
+          [class.status-error]="loadStatus.type === 'error'"
+        >
+          <span class="status-icon" *ngIf="loadStatus.isLoading">⏳</span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'success'">✅</span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'error'">❌</span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'info'">ℹ️</span>
+          <span class="status-text">{{ loadStatus.message }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workflow Information -->
+    <div class="card card-full-width">
+      <div class="card-header">
+        <h2>How It Works</h2>
+      </div>
+      <div class="card-body">
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Load Container</h3>
+              <p>Arctic container (.pbtxt) is loaded via cryo-asset system</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Parse Scene Data</h3>
+              <p>Container data is parsed and validated by cryo-studio-server</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Activate Rendering</h3>
+              <p>Scene is sent to coregfx-scene-renderer (pbr_app) for rendering</p>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-note">
+          <strong>Note:</strong> This workflow is similar to how index.arctic works on startup.
+          Use index.container.pbtxt as an alternative startup file.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disconnected State -->
+  <div class="disconnected-state" *ngIf="!isConnected">
+    <div class="disconnected-icon">🔌</div>
+    <h2>Not Connected</h2>
+    <p>Unable to connect to cryo-studio-server</p>
+    <p class="hint">Make sure the server is running on http://localhost:52009</p>
+    <button class="btn btn-primary" (click)="api.checkConnection()">
+      Retry Connection
+    </button>
+  </div>
+</div>

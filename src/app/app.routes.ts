@@ -8,8 +8,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/io-monitor',
+    redirectTo: '/server-monitor',
     pathMatch: 'full'
+  },
+  {
+    path: 'server-monitor',
+    loadComponent: () => import('./tools/server-monitor/server-monitor.component').then(m => m.ServerMonitorComponent)
   },
   {
     path: 'io-monitor',
@@ -32,7 +36,11 @@ export const routes: Routes = [
     loadComponent: () => import('./tools/build-lab/build-lab.component').then(m => m.BuildLabComponent)
   },
   {
+    path: 'container-runtime',
+    loadComponent: () => import('./tools/container-runtime/container-runtime.component').then(m => m.ContainerRuntimeComponent)
+  },
+  {
     path: '**',
-    redirectTo: '/io-monitor'
+    redirectTo: '/server-monitor'
   }
 ];

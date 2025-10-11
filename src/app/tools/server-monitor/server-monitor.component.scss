@@ -1,0 +1,465 @@
+/**
+ * Server Monitor Styles
+ * GitHub Dark Theme with Arctic Blue accents
+ */
+
+.server-monitor {
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+
+.monitor-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #21262d;
+
+  h1 {
+    color: #58a6ff;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: #8b949e;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+  }
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #768390;
+    transition: background 0.3s ease;
+
+    &.online {
+      background: #3fb950;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    &.offline {
+      background: #f85149;
+    }
+  }
+
+  .status-text {
+    color: #c9d1d9;
+    font-weight: 600;
+  }
+
+  .api-url {
+    color: #8b949e;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+// ============================================================================
+// Grid Layout
+// ============================================================================
+
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+// ============================================================================
+// Cards
+// ============================================================================
+
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.1);
+  }
+
+  &.wide {
+    grid-column: span 2;
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #21262d;
+
+  h2 {
+    color: #58a6ff;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// ============================================================================
+// Metrics
+// ============================================================================
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #21262d;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.metric-label {
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.metric-value {
+  color: #c9d1d9;
+  font-weight: 600;
+  font-family: 'Consolas', 'Monaco', monospace;
+
+  &.metric-highlight {
+    color: #58a6ff;
+    font-size: 1.2em;
+  }
+}
+
+.update-time {
+  text-align: center;
+  color: #8b949e;
+  font-size: 0.85em;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #21262d;
+}
+
+// ============================================================================
+// Controls
+// ============================================================================
+
+.control-group {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 12px;
+
+  h3 {
+    color: #8b949e;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.5px;
+  }
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    color: #8b949e;
+    min-width: 80px;
+    font-weight: 500;
+  }
+
+  input[type="number"],
+  input[type="text"] {
+    flex: 1;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #c9d1d9;
+    font-family: 'Consolas', 'Monaco', monospace;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #58a6ff;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ============================================================================
+// Buttons
+// ============================================================================
+
+.btn-primary {
+  background: #238636;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #2ea043;
+  }
+
+  &:active:not(:disabled) {
+    background: #1c7430;
+  }
+
+  &:disabled {
+    background: #21262d;
+    color: #768390;
+    cursor: not-allowed;
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+}
+
+.btn-small {
+  background: #21262d;
+  color: #c9d1d9;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #30363d;
+  }
+}
+
+.btn-icon {
+  background: transparent;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #58a6ff;
+    border-color: #58a6ff;
+    background: #0d1117;
+  }
+}
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+.message {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 500;
+
+  &.success {
+    background: #238636;
+    color: #ffffff;
+  }
+
+  &.error {
+    background: #da3633;
+    color: #ffffff;
+  }
+}
+
+.error-state {
+  text-align: center;
+  padding: 20px;
+  color: #f85149;
+
+  p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+  }
+}
+
+.info-text {
+  color: #8b949e;
+  font-size: 0.85em;
+  line-height: 1.5;
+
+  p {
+    margin: 5px 0;
+  }
+
+  code {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 3px;
+    padding: 2px 6px;
+    color: #79c0ff;
+    font-family: 'Consolas', 'Monaco', monospace;
+  }
+}
+
+// ============================================================================
+// Vulkan State Dump
+// ============================================================================
+
+.vulkan-dump {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 10px;
+
+  pre {
+    margin: 0;
+    color: #79c0ff;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}
+
+// ============================================================================
+// API Endpoints
+// ============================================================================
+
+.endpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.endpoint-item {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #161b22;
+    border-color: #58a6ff;
+  }
+
+  .method {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.75em;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    min-width: 40px;
+    text-align: center;
+
+    &.get {
+      background: #238636;
+      color: #ffffff;
+    }
+
+    &.post {
+      background: #1f6feb;
+      color: #ffffff;
+    }
+
+    &.put {
+      background: #d29922;
+      color: #ffffff;
+    }
+
+    &.delete {
+      background: #da3633;
+      color: #ffffff;
+    }
+  }
+
+  .path {
+    color: #79c0ff;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85em;
+  }
+}
+
+// ============================================================================
+// Responsive Design
+// ============================================================================
+
+@media (max-width: 768px) {
+  .monitor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card.wide {
+    grid-column: span 1;
+  }
+
+  .monitor-header h1 {
+    font-size: 2em;
+  }
+
+  .connection-status {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
