@@ -383,6 +383,16 @@ export class ArcticApiService {
   clearCurrentScene(): Observable<{ success: boolean; message: string }> {
     return this.http.post<{ success: boolean; message: string }>(`${this.apiBaseUrl}/api/scenes/clear`, {});
   }
+
+  /**
+   * Get container file content (for viewing)
+   * GET /api/containers/content?path=...
+   */
+  getContainerContent(containerPath: string): Observable<{ content: string; path: string }> {
+    return this.http.get<{ content: string; path: string }>(
+      `${this.apiBaseUrl}/api/containers/content?path=${encodeURIComponent(containerPath)}`
+    );
+  }
 }
 
 // Container file interface

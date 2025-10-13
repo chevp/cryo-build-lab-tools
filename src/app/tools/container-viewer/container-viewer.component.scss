@@ -1,0 +1,389 @@
+/**
+ * Copyright (c) 2025 Patrice Chevillat
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
+.container-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  overflow: hidden;
+}
+
+/* === Header === */
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #252526;
+  border-bottom: 1px solid #3e3e42;
+
+  .header-left {
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 4px 0;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #cccccc;
+      margin: 0;
+    }
+  }
+
+  .header-right {
+    .connection-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #3e3e42;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #cccccc;
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ff6b6b;
+      }
+
+      &.connected {
+        .status-dot {
+          background: #51cf66;
+        }
+      }
+    }
+  }
+}
+
+/* === Controls Panel === */
+.controls-panel {
+  padding: 16px 24px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+
+  .control-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 12px;
+      color: #cccccc;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    select,
+    input[type="text"] {
+      padding: 10px 12px;
+      background: #3c3c3c;
+      border: 1px solid #3e3e42;
+      border-radius: 4px;
+      color: #d4d4d4;
+      font-size: 13px;
+      font-family: 'Consolas', 'Monaco', monospace;
+
+      &:focus {
+        outline: none;
+        border-color: #007acc;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    input[type="text"]::placeholder {
+      color: #666;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+
+    &.btn-primary {
+      background: #0e639c;
+      color: #ffffff;
+
+      &:hover:not(:disabled) {
+        background: #1177bb;
+      }
+    }
+
+    &.btn-secondary {
+      background: #3e3e42;
+      color: #d4d4d4;
+
+      &:hover:not(:disabled) {
+        background: #505050;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* === Error Panel === */
+.error-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: #5c2626;
+  border-bottom: 1px solid #8b3a3a;
+  color: #f48771;
+  font-size: 13px;
+
+  .error-icon {
+    font-size: 20px;
+  }
+}
+
+/* === Content Area === */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* === Info Bar === */
+.info-bar {
+  display: flex;
+  gap: 24px;
+  padding: 12px 24px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+  font-size: 12px;
+
+  .info-item {
+    color: #cccccc;
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+  }
+}
+
+/* === Raw Content View === */
+.raw-content-view {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 24px;
+
+  .raw-content {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #d4d4d4;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+/* === Parsed Content View === */
+.parsed-content-view {
+  flex: 1;
+  overflow: auto;
+
+  .field-list {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .field-row {
+    padding: 6px 12px;
+    border-bottom: 1px solid #2d2d30;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #2d2d30;
+    }
+
+    &.field-message {
+      background: rgba(0, 122, 204, 0.1);
+      border-left: 3px solid #007acc;
+    }
+
+    &.field-end {
+      color: #666;
+    }
+  }
+
+  .field-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .field-name {
+    color: #9cdcfe;
+    font-weight: 500;
+    min-width: 150px;
+  }
+
+  .field-separator {
+    color: #666;
+  }
+
+  .field-value {
+    flex: 1;
+    color: #ce9178;
+
+    &.field-type-int,
+    &.field-type-float {
+      color: #b5cea8;
+    }
+
+    &.field-type-bool {
+      color: #569cd6;
+    }
+
+    &.field-type-string {
+      color: #ce9178;
+    }
+
+    &.field-type-message {
+      color: #4ec9b0;
+      font-weight: 600;
+    }
+
+    &.field-type-end {
+      color: #666;
+    }
+  }
+
+  .field-type-badge {
+    padding: 2px 8px;
+    background: #3e3e42;
+    border-radius: 3px;
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* === Empty State === */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: #cccccc;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 4px 0;
+    max-width: 500px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    margin-top: 16px;
+  }
+}
+
+/* === Loading State === */
+.loading-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #cccccc;
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #3e3e42;
+    border-top: 4px solid #007acc;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === Scrollbar Styling === */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #252526;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

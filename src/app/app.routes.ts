@@ -40,6 +40,10 @@ export const routes: Routes = [
     loadComponent: () => import('./tools/container-runtime/container-runtime.component').then(m => m.ContainerRuntimeComponent)
   },
   {
+    path: 'container-viewer',
+    loadComponent: () => import('./tools/container-viewer/container-viewer.component').then(m => m.ContainerViewerComponent)
+  },
+  {
     path: '**',
     redirectTo: '/server-monitor'
   }
