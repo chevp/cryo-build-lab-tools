@@ -1,6 +1,6 @@
-# 🧊 Cryo Build Lab Tools
+# 🧊 Cryo Lab Tools
 
-**Consolidated Angular multi-tool application for Cryo Build Lab**
+**Consolidated Angular multi-tool application for Cryo Lab**
 
 This is an application that consolidates all Cryo development tools into a single, cohesive web application with proper routing and state management.
 

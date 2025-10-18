@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Server Monitor** is a real-time monitoring and control interface for **cryo-studio-server**, providing direct access to the C++ HTTP REST API defined in `cryo_tooling.proto`. It's integrated into the **Cryo Build Lab Tools** Angular application.
+The **Server Monitor** is a real-time monitoring and control interface for **cryo-studio-server**, providing direct access to the C++ HTTP REST API defined in `cryo_tooling.proto`. It's integrated into the **Cryo Lab Tools** Angular application.
 
 ### Architecture
 
@@ -55,7 +55,7 @@ The **Server Monitor** is a real-time monitoring and control interface for **cry
 
 ## How to Use
 
-### Start the Cryo Build Lab Tools
+### Start the Cryo Lab Tools
 
 ```bash
 cd apps/cryo-build-lab-tools

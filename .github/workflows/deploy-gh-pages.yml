@@ -1,4 +1,4 @@
-name: Deploy Cryo Build Lab Tools to GitHub Pages
+name: Deploy Cryo Lab Tools to GitHub Pages
 
 on:
   push:

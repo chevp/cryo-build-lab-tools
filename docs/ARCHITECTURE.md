@@ -1,4 +1,4 @@
-# Cryo Build Lab Tools - Architecture
+# Cryo Lab Tools - Architecture
 
 ## Server Architecture (Updated 2025-10-11)
 
@@ -13,7 +13,7 @@
 - ❌ `shader-graph-renderer.exe` HTTP server (port 52010) - DEPRECATED
 - ❌ Direct HTTP to individual renderers - DEPRECATED
 
-### Cryo Build Lab Tools Configuration
+### Cryo Lab Tools Configuration
 
 **API Service**: `arctic-api.service.ts`
 ```typescript
