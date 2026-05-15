@@ -18,7 +18,7 @@
       <div class="card-header">
         <h2>Current Scene</h2>
         <button class="btn-icon" (click)="getCurrentScene()" title="Refresh">
-          🔄
+          <i class="fa-solid fa-arrows-rotate"></i>
         </button>
       </div>
       <div class="card-body">
@@ -53,7 +53,7 @@
           Load the default startup container (index.container.pbtxt)
         </p>
         <button class="btn btn-primary btn-large" (click)="runStartupContainer()" [disabled]="loadStatus.isLoading">
-          <span class="btn-icon">▶️</span>
+          <span class="btn-icon"><i class="fa-solid fa-play"></i></span>
           Run Startup Container
         </button>
       </div>
@@ -64,7 +64,7 @@
       <div class="card-header">
         <h2>Available Containers</h2>
         <button class="btn-icon" (click)="refreshContainerList()" title="Refresh list">
-          🔄
+          <i class="fa-solid fa-arrows-rotate"></i>
         </button>
       </div>
       <div class="card-body">
@@ -121,7 +121,7 @@
             (click)="selectedContainer = ''; runContainer()"
             [disabled]="!customContainerPath || loadStatus.isLoading"
           >
-            <span class="btn-icon">▶️</span>
+            <span class="btn-icon"><i class="fa-solid fa-play"></i></span>
             Run
           </button>
         </div>
@@ -137,10 +137,10 @@
           [class.status-success]="loadStatus.type === 'success'"
           [class.status-error]="loadStatus.type === 'error'"
         >
-          <span class="status-icon" *ngIf="loadStatus.isLoading">⏳</span>
-          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'success'">✅</span>
-          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'error'">❌</span>
-          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'info'">ℹ️</span>
+          <span class="status-icon" *ngIf="loadStatus.isLoading"><i class="fa-solid fa-hourglass-half"></i></span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'success'"><i class="fa-solid fa-circle-check"></i></span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'error'"><i class="fa-solid fa-circle-xmark"></i></span>
+          <span class="status-icon" *ngIf="!loadStatus.isLoading && loadStatus.type === 'info'"><i class="fa-solid fa-circle-info"></i></span>
           <span class="status-text">{{ loadStatus.message }}</span>
         </div>
       </div>
@@ -185,7 +185,7 @@
 
   <!-- Disconnected State -->
   <div class="disconnected-state" *ngIf="!isConnected">
-    <div class="disconnected-icon">🔌</div>
+    <div class="disconnected-icon"><i class="fa-solid fa-plug"></i></div>
     <h2>Not Connected</h2>
     <p>Unable to connect to cryo-studio-server</p>
     <p class="hint">Make sure the server is running on http://localhost:52009</p>

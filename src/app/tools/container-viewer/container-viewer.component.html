@@ -7,7 +7,7 @@
   <!-- Header -->
   <div class="tool-header">
     <div class="header-left">
-      <h1>📦 Container Viewer</h1>
+      <h1><i class="fa-solid fa-box"></i> Container Viewer</h1>
       <p class="subtitle">View and inspect .container.pbtxt files</p>
     </div>
     <div class="header-right">
@@ -52,8 +52,8 @@
             (click)="loadContainer()"
             [disabled]="isLoading || !isConnected"
           >
-            <span *ngIf="!isLoading">🔍 Load</span>
-            <span *ngIf="isLoading">⏳ Loading...</span>
+            <span *ngIf="!isLoading"><i class="fa-solid fa-magnifying-glass"></i> Load</span>
+            <span *ngIf="isLoading"><i class="fa-solid fa-hourglass-half"></i> Loading...</span>
           </button>
           <button
             class="btn btn-secondary"
@@ -61,7 +61,7 @@
             [disabled]="isLoading || !isConnected"
             title="Refresh container list"
           >
-            🔄
+            <i class="fa-solid fa-arrows-rotate"></i>
           </button>
         </div>
       </div>
@@ -83,13 +83,14 @@
         <label>&nbsp;</label>
         <div class="button-group">
           <button class="btn btn-secondary" (click)="showRawContent = !showRawContent">
-            {{ showRawContent ? '📋 Parsed View' : '📄 Raw View' }}
+            <ng-container *ngIf="showRawContent"><i class="fa-solid fa-list-ul"></i> Parsed View</ng-container>
+            <ng-container *ngIf="!showRawContent"><i class="fa-solid fa-file-lines"></i> Raw View</ng-container>
           </button>
           <button class="btn btn-secondary" (click)="exportAsJson()" title="Export as JSON">
-            💾 Export
+            <i class="fa-solid fa-floppy-disk"></i> Export
           </button>
           <button class="btn btn-secondary" (click)="copyToClipboard()" title="Copy to clipboard">
-            📋 Copy
+            <i class="fa-solid fa-clipboard"></i> Copy
           </button>
         </div>
       </div>
@@ -98,7 +99,7 @@
 
   <!-- Error Message -->
   <div class="error-panel" *ngIf="errorMessage">
-    <span class="error-icon">⚠️</span>
+    <span class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
     <span>{{ errorMessage }}</span>
   </div>
 
@@ -150,7 +151,7 @@
 
   <!-- Empty State -->
   <div class="empty-state" *ngIf="!parsedContainer && !errorMessage && !isLoading">
-    <div class="empty-icon">📦</div>
+    <div class="empty-icon"><i class="fa-solid fa-box"></i></div>
     <h3>No Container Loaded</h3>
     <p>Select a container file from the dropdown or enter a custom path to view its contents.</p>
     <p class="hint">Container files use Protocol Buffer text format (.pbtxt) and contain structured data for the Cryo engine.</p>

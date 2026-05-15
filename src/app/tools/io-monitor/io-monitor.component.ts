@@ -58,11 +58,11 @@ export class IoMonitorComponent implements OnInit, OnDestroy {
     // Test connection
     this.api.ping().subscribe({
       next: () => {
-        console.log('✓ Connected to Arctic HTTP API');
+        console.log('Connected to Arctic HTTP API');
         this.loadDemoMessages();
       },
       error: () => {
-        console.warn('⚠ Arctic HTTP server not available - using demo data');
+        console.warn('Arctic HTTP server not available - using demo data');
         this.loadDemoMessages();
       }
     });

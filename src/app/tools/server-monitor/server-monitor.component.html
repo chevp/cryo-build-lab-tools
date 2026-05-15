@@ -1,6 +1,6 @@
 <div class="server-monitor">
   <div class="monitor-header">
-    <h1>🎮 Server Monitor</h1>
+    <h1><i class="fa-solid fa-gamepad"></i> Server Monitor</h1>
     <p class="subtitle">Real-time Cryo Studio Server Monitoring & Control</p>
     <div class="connection-status">
       <span class="status-indicator" [class.online]="isConnected" [class.offline]="!isConnected"></span>
@@ -17,9 +17,9 @@
         <h2>System Status</h2>
         <div class="header-actions">
           <button class="btn-icon" (click)="toggleAutoRefresh()" [title]="autoRefreshEnabled ? 'Disable auto-refresh' : 'Enable auto-refresh'">
-            {{ autoRefreshEnabled ? '⏸' : '▶' }}
+            <i class="fa-solid" [class.fa-pause]="autoRefreshEnabled" [class.fa-play]="!autoRefreshEnabled"></i>
           </button>
-          <button class="btn-icon" (click)="refreshStatus()" title="Refresh now">🔄</button>
+          <button class="btn-icon" (click)="refreshStatus()" title="Refresh now"><i class="fa-solid fa-arrows-rotate"></i></button>
         </div>
       </div>
       <div class="card-body">
@@ -55,7 +55,7 @@
         </div>
         <ng-template #noStatus>
           <div class="error-state">
-            <p>⚠ Server not responding</p>
+            <p><i class="fa-solid fa-triangle-exclamation"></i> Server not responding</p>
             <button class="btn-primary" (click)="refreshStatus()">Retry Connection</button>
           </div>
         </ng-template>
@@ -105,7 +105,8 @@
         <button class="btn-primary full-width" (click)="updateCamera()" [disabled]="!isConnected">
           Update Camera
         </button>
-        <div class="message" *ngIf="cameraMessage" [class.success]="cameraMessage.includes('✓')" [class.error]="cameraMessage.includes('✗')">
+        <div class="message" *ngIf="cameraMessage" [class.success]="cameraMessageType === 'success'" [class.error]="cameraMessageType === 'error'">
+          <i class="fa-solid" [class.fa-check]="cameraMessageType === 'success'" [class.fa-xmark]="cameraMessageType === 'error'"></i>
           {{ cameraMessage }}
         </div>
       </div>
@@ -122,9 +123,10 @@
           <input type="text" [(ngModel)]="screenshotFilename" placeholder="screenshot.png" />
         </div>
         <button class="btn-primary full-width" (click)="takeScreenshot()" [disabled]="!isConnected">
-          📸 Take Screenshot
+          <i class="fa-solid fa-camera"></i> Take Screenshot
         </button>
-        <div class="message" *ngIf="screenshotMessage" [class.success]="screenshotMessage.includes('✓')" [class.error]="screenshotMessage.includes('✗')">
+        <div class="message" *ngIf="screenshotMessage" [class.success]="screenshotMessageType === 'success'" [class.error]="screenshotMessageType === 'error'">
+          <i class="fa-solid" [class.fa-check]="screenshotMessageType === 'success'" [class.fa-xmark]="screenshotMessageType === 'error'"></i>
           {{ screenshotMessage }}
         </div>
         <div class="info-text">
@@ -146,7 +148,8 @@
         <button class="btn-primary" (click)="dumpVulkanState()" [disabled]="!isConnected">
           Dump Vulkan State
         </button>
-        <div class="message" *ngIf="vulkanStateMessage" [class.success]="vulkanStateMessage.includes('✓')" [class.error]="vulkanStateMessage.includes('✗')">
+        <div class="message" *ngIf="vulkanStateMessage" [class.success]="vulkanStateMessageType === 'success'" [class.error]="vulkanStateMessageType === 'error'">
+          <i class="fa-solid" [class.fa-check]="vulkanStateMessageType === 'success'" [class.fa-xmark]="vulkanStateMessageType === 'error'"></i>
           {{ vulkanStateMessage }}
         </div>
         <div class="vulkan-dump" *ngIf="vulkanStateDump">

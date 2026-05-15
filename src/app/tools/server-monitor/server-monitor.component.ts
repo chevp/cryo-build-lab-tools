@@ -42,14 +42,17 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
   cameraPosition = { x: 0, y: 3, z: 15 };
   cameraRotation = { x: 0, y: 0, z: 0 };
   cameraMessage = '';
+  cameraMessageType: 'success' | 'error' | '' = '';
 
   // Screenshot
   screenshotFilename = 'dashboard_capture.png';
   screenshotMessage = '';
+  screenshotMessageType: 'success' | 'error' | '' = '';
 
   // Vulkan state
   vulkanStateDump = '';
   vulkanStateMessage = '';
+  vulkanStateMessageType: 'success' | 'error' | '' = '';
 
   // Auto-refresh
   autoRefreshEnabled = true;
@@ -162,14 +165,20 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
     this.api.updateCamera(update).subscribe({
       next: (response) => {
         if (response.success) {
-          this.cameraMessage = '✓ Camera updated successfully!';
-          setTimeout(() => this.cameraMessage = '', 3000);
+          this.cameraMessage = 'Camera updated successfully!';
+          this.cameraMessageType = 'success';
+          setTimeout(() => {
+            this.cameraMessage = '';
+            this.cameraMessageType = '';
+          }, 3000);
         } else {
-          this.cameraMessage = '✗ Failed to update camera';
+          this.cameraMessage = 'Failed to update camera';
+          this.cameraMessageType = 'error';
         }
       },
       error: (err) => {
-        this.cameraMessage = `✗ Error: ${err.message}`;
+        this.cameraMessage = `Error: ${err.message}`;
+        this.cameraMessageType = 'error';
       }
     });
   }
@@ -188,14 +197,20 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
     this.api.takeScreenshot(this.screenshotFilename).subscribe({
       next: (response) => {
         if (response.success) {
-          this.screenshotMessage = `✓ Screenshot saved: ${response.filename}`;
-          setTimeout(() => this.screenshotMessage = '', 5000);
+          this.screenshotMessage = `Screenshot saved: ${response.filename}`;
+          this.screenshotMessageType = 'success';
+          setTimeout(() => {
+            this.screenshotMessage = '';
+            this.screenshotMessageType = '';
+          }, 5000);
         } else {
-          this.screenshotMessage = '✗ Failed to take screenshot';
+          this.screenshotMessage = 'Failed to take screenshot';
+          this.screenshotMessageType = 'error';
         }
       },
       error: (err) => {
-        this.screenshotMessage = `✗ Error: ${err.message}`;
+        this.screenshotMessage = `Error: ${err.message}`;
+        this.screenshotMessageType = 'error';
       }
     });
   }
@@ -209,13 +224,16 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
       next: (state) => {
         if (state.state_dump) {
           this.vulkanStateDump = state.state_dump;
-          this.vulkanStateMessage = '✓ Vulkan state dumped successfully';
+          this.vulkanStateMessage = 'Vulkan state dumped successfully';
+          this.vulkanStateMessageType = 'success';
         } else {
-          this.vulkanStateMessage = '✗ No state dump available';
+          this.vulkanStateMessage = 'No state dump available';
+          this.vulkanStateMessageType = 'error';
         }
       },
       error: (err) => {
-        this.vulkanStateMessage = `✗ Error: ${err.message}`;
+        this.vulkanStateMessage = `Error: ${err.message}`;
+        this.vulkanStateMessageType = 'error';
       }
     });
   }
@@ -223,6 +241,7 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
   clearVulkanState() {
     this.vulkanStateDump = '';
     this.vulkanStateMessage = '';
+    this.vulkanStateMessageType = '';
   }
 
   // ============================================================================
@@ -246,10 +265,10 @@ export class ServerMonitorComponent implements OnInit, OnDestroy {
   pingServer() {
     this.api.ping().subscribe({
       next: () => {
-        alert('✓ Server is online!\n\nConnection successful.');
+        alert('Server is online!\n\nConnection successful.');
       },
       error: (err) => {
-        alert(`✗ Server is offline!\n\nError: ${err.message || 'Connection failed'}`);
+        alert(`Server is offline!\n\nError: ${err.message || 'Connection failed'}`);
       }
     });
   }

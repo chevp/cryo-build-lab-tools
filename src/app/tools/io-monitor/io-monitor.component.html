@@ -1,12 +1,13 @@
 <div class="io-monitor">
   <div class="toolbar">
-    <h2>📊 Arctic I/O Monitor</h2>
+    <h2><i class="fa-solid fa-chart-column"></i> Arctic I/O Monitor</h2>
     <div class="toolbar-actions">
       <button (click)="toggleMonitoring()" [class.active]="isMonitoring">
-        {{ isMonitoring ? '⏸ Pause' : '▶ Start' }}
+        <ng-container *ngIf="isMonitoring"><i class="fa-solid fa-pause"></i> Pause</ng-container>
+        <ng-container *ngIf="!isMonitoring"><i class="fa-solid fa-play"></i> Start</ng-container>
       </button>
-      <button (click)="clearMessages()">🗑️ Clear</button>
-      <button (click)="exportMessages()">💾 Export</button>
+      <button (click)="clearMessages()"><i class="fa-solid fa-trash"></i> Clear</button>
+      <button (click)="exportMessages()"><i class="fa-solid fa-floppy-disk"></i> Export</button>
       <input
         type="text"
         placeholder="Search messages..."
@@ -51,7 +52,7 @@
     <div class="detail-panel" *ngIf="selectedMessage">
       <div class="detail-header">
         <h3>Message Details</h3>
-        <button (click)="selectedMessage = null">✕</button>
+        <button (click)="selectedMessage = null"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="detail-content">
         <div class="detail-section">
